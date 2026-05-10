@@ -142,12 +142,25 @@ export default function App() {
         header: true,
         skipEmptyLines: true,
         complete: (results) => {
-          const parsedData = results.data.map((row: any) => ({
-            rank: parseInt(row['RANK'] || row['Rank'] || '0'),
-            name: row['NOME'] || row['Nome'] || row['Driver'] || 'Unknown',
-            points: parseFloat(row['TOTAL PONTOS'] || row['Total Pontos'] || row['Points'] || '0')
-          }))
-          .filter(d => d.name !== 'Unknown')
+          const parsedData = results.data.map((row: any) => {
+            // Find keys case-insensitively or with common variants
+            const getField = (variants: string[]) => {
+              for (const variant of variants) {
+                if (row[variant] !== undefined) return row[variant];
+                // Try case-insensitive match
+                const match = Object.keys(row).find(k => k.toLowerCase() === variant.toLowerCase());
+                if (match) return row[match];
+              }
+              return undefined;
+            };
+
+            return {
+              rank: parseInt(getField(['RANK', 'Rank', 'POS']) || '0'),
+              name: getField(['NOME', 'Nome', 'Name', 'Driver', 'PILOTO']) || 'Unknown',
+              points: parseFloat(getField(['PONTOS', 'TOTAL PONTOS', 'Total Pontos', 'Points', 'PTS']) || '0')
+            };
+          })
+          .filter(d => d.name !== 'Unknown' && d.name.trim() !== '')
           .sort((a, b) => b.points - a.points)
           .map((d, index) => ({ ...d, rank: index + 1 })); // Correcting rank based on sorted points
           
