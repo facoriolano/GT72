@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,600;0,800;1,400;1,600;1,800&family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-racing: "Barlow", sans-serif;
+  
+  --color-f1-red: #e10600;
+  --color-f1-black: #15151e;
+  --color-f1-dark: #000000;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-gray-50 text-gray-900 transition-colors duration-300;
+  }
+  
+  body.dark {
+    @apply bg-f1-dark text-white;
+  }
+}
+
+.f1-border-bottom {
+  border-bottom: 4px solid var(--color-f1-red);
+}
+
+.f1-card {
+  @apply relative overflow-hidden transition-all duration-200;
+  border-left: 4px solid transparent;
+}
+
+.f1-card:hover {
+  @apply border-f1-red bg-gray-100 dark:bg-zinc-900;
+}
+
+.f1-gradient {
+  background: linear-gradient(135deg, var(--color-f1-red) 0%, #ff1e1e 100%);
+}

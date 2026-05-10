@@ -1,11 +1,23 @@
-<div align="center">
+# GT7 Championship Ranking Dashboard
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Professional racing ranking dashboard inspired by the F1 app, featuring real-time data from Google Sheets, dark mode, and smooth animations.
 
-  <h1>Built with AI Studio</h2>
+## How to Deploy to GitHub Pages
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+1. **Push to GitHub**: Make sure all files (including `.github/workflows/deploy.yml`) are in your repository.
+2. **Settings**: Go to `Settings` -> `Pages`.
+3. **Source**: Under "Build and deployment", set "Source" to **GitHub Actions**.
+4. **Action**: The deployment will start automatically. You can track it in the `Actions` tab of your repository.
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Development
 
-</div>
+```bash
+npm install
+npm run dev
+```
+
+## Production Build
+
+```bash
+npm run build
+```
